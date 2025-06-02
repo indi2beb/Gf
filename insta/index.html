@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Followers Sent</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(to right, #000000, #1f1f1f);
+      color: #39ff14;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 40px;
+    }
+
+    .terminal {
+      border: 3px solid #39ff14;
+      padding: 25px;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: 0 0 20px #39ff14;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header {
+      background: #39ff14;
+      color: #000;
+      padding: 8px 12px;
+      font-weight: bold;
+      font-size: 24px;
+      border-radius: 5px;
+      display: inline-block;
+      position: relative;
+      top: 10px;
+      left: 20px;
+      box-shadow: 0 0 8px #39ff14;
+    }
+
+    .status {
+      margin-top: 60px;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .blinker {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1 }
+      50% { opacity: 0 }
+      100% { opacity: 1 }
+    }
+
+    .svg-icon {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+
+    .glow {
+      text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 15px #39ff14;
+    }
+
+    .svg-bg {
+      background: radial-gradient(circle at center, rgba(57,255,20,0.2) 0%, transparent 70%);
+      padding: 20px;
+      border-radius: 50%;
+    }
+
+    .progress-bar {
+      height: 5px;
+      width: 0%;
+      background: #39ff14;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: width 0.9s ease;
+    }
+
+    .final-message {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 10px #39ff14;
+      animation: flash 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes flash {
+      from { opacity: 0.6; }
+      to { opacity: 1; }
+    }
+      .highlight-user {
+      font-weight: bold;
+      color: #000;
+      background: linear-gradient(to right, #39ff14, #ccff33);
+      padding: 2px 6px;
+      border-radius: 6px;
+      text-shadow: none;
+    }
+      .top-marquee {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #39ff14;
+      color: #000;
+      font-weight: bold;
+      padding: 5px 0;
+      z-index: 1000;
+      font-size: 16px;
+      overflow: hidden;
+    }
+
+    .top-marquee span {
+      display: inline-block;
+      white-space: nowrap;
+      padding-left: 100%;
+      animation: scroll-left 10s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+</style>
+</head>
+<body>
+  <div class="top-marquee"><span>🔒 root@linux-bot terminal initialized... awaiting commands...</span></div>
+  <div class="terminal">
+    <div class="svg-bg">
+      <svg class="svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#39ff14" stroke-width="4"/>
+        <path d="M20 32l8 8 16-16" stroke="#39ff14" stroke-width="4" fill="none"/>
+      </svg>
+    </div>
+    <div class="header">
+      <svg width="20" height="20" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
+        <path d="M349.33 69.33H162.67C108.53 69.33 69.33 108.53 69.33 162.67v186.66c0 54.14 39.2 93.34 93.34 93.34h186.66c54.14 0 93.34-39.2 93.34-93.34V162.67c0-54.14-39.2-93.34-93.34-93.34zM256 362.67c-58.91 0-106.67-47.76-106.67-106.67S197.09 149.33 256 149.33 362.67 197.09 362.67 256 314.91 362.67 256 362.67zm117.33-202.67a21.33 21.33 0 1 1 0-42.67 21.33 21.33 0 0 1 0 42.67z" fill="#000"/>
+      </svg>
+      <strong>root@instagram-bot:~#</strong>
+    </div>
+    <div class="status glow" id="status">Processing...</div>
+    <div class="progress-bar" id="progress"></div>
+  </div>
+
+  <audio id="bootSound" autoplay>
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-retro-jump-223.wav" type="audio/wav">
+  </audio>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      function getUsername() {
+        const params = new URLSearchParams(window.location.search);
+        const userParam = params.get("user");
+        return userParam && userParam.trim() !== "" ? userParam : "virat.kohli";
+      }
+
+      const user = getUsername();
+      const status = document.getElementById("status");
+      const progressBar = document.getElementById("progress");
+
+      let lines = [
+        `Target Username: <span class='highlight-user'>@${user}</span>`,
+        "Connecting to proxy server...",
+        "Injecting packets...",
+        "Cracking Insta algorithm...",
+        `✅ 1000 followers sent to <span class='highlight-user'>@${user}</span>`,
+        "System secured. Operation success."
+      ];
+
+      let i = 0;
+
+      function showLine() {
+        if (i < lines.length) {
+          status.innerHTML += "<br>~ " + lines[i];
+          progressBar.style.width = `${((i + 1) / lines.length) * 100}%`;
+          i++;
+          setTimeout(showLine, 900);
+        } else {
+          progressBar.style.width = "100%";
+          const finalMessage = document.createElement("div");
+          finalMessage.className = "final-message";
+          finalMessage.innerHTML = "🎉 Operation Completed! Followers Delivered!";
+          status.appendChild(finalMessage);
+        }
+      }
+
+      showLine();
+    });
+  </script>
+</body>
+</html>
